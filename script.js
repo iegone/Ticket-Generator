@@ -255,3 +255,101 @@ function flightLogo() {
     photo.src = URL.createObjectURL(flightLogo.files[0]);
   };
 }
+
+function initializePage() {
+  // جلب بيانات المطارات وتخزينها في airportCodes
+  $.get("airports.dat", function (data) {
+    const airportCodes = {};
+
+    // تقسيم البيانات إلى أسطر
+    const lines = data.split("\n");
+
+    // معالجة كل سطر وإضافة بيانات المطارات إلى الهيكل
+    lines.forEach(function (line) {
+      const parts = line.split(",");
+      if (parts.length >= 12) {
+        const airportCode = parts[4].replace(/"/g, ""); // الرمز
+        const country = parts[3].replace(/"/g, ""); // البلد
+        const city = parts[2].replace(/"/g, ""); // المدينة
+        airportCodes[airportCode] = `${country}, ${city}`;
+      }
+    });
+
+    // تهيئة خاصية autocomplete لحقول المدينة في النموذج
+    $(function () {
+      $("#departureCity").autocomplete({
+        source: Object.keys(airportCodes),
+        select: function (event, ui) {
+          $("#departureCity").val(ui.item.value);
+          fillDepartureCity();
+        },
+      });
+
+      $("#arrivalCity").autocomplete({
+        source: Object.keys(airportCodes),
+        select: function (event, ui) {
+          $("#arrivalCity").val(ui.item.value);
+          fillArrivalCity();
+        },
+      });
+    });
+
+    function fillDepartureCity() {
+      const departureCityCode = document
+        .getElementById("departureCity")
+        .value.toUpperCase();
+      const departureCityInfo = airportCodes[departureCityCode] || "";
+      document.getElementById("airportDepartureCity").value = departureCityInfo;
+    }
+
+    function fillArrivalCity() {
+      const arrivalCityCode = document
+        .getElementById("arrivalCity")
+        .value.toUpperCase();
+      const arrivalCityInfo = airportCodes[arrivalCityCode] || "";
+      document.getElementById("airportArrivalCity").value = arrivalCityInfo;
+    }
+  });
+
+  
+  
+  $(document).ready(function () {
+    // Autocomplete for departureCity field
+    $("#departureCity").autocomplete({
+      source: function (request, response) {
+        $.ajax({
+          url: "airport_search.php", // Replace with your backend script to fetch airport data
+          method: "GET",
+          dataType: "json",
+          data: {
+            term: request.term,
+          },
+          success: function (data) {
+            response(data);
+          },
+        });
+      },
+      minLength: 2, // Minimum characters before autocomplete starts
+    });
+
+    // Autocomplete for arrivalCity field
+    $("#arrivalCity").autocomplete({
+      source: function (request, response) {
+        $.ajax({
+          url: "airport_search.php", // Replace with your backend script to fetch airport data
+          method: "GET",
+          dataType: "json",
+          data: {
+            term: request.term,
+          },
+          success: function (data) {
+            response(data);
+          },
+        });
+      },
+      minLength: 2, // Minimum characters before autocomplete starts
+    });
+  });
+
+}
+

@@ -1,35 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            height: 100vh;
-            width: 100vw;
-            position: relative;
-            padding: 0;
-            margin: 0%;
-
-        }
-        .section-one{
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 400px;
-            background: #c0c0c0;
-
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airport Code Auto-fill</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
-    <section class="section-one">
-        
-    </section>
-    <section class="section-two">
+  <div class="form-group">
+    <label for="departureCity">Departure City (Airport Code):</label>
+    <input
+      type="text"
+      id="departureCity"
+      name="departureCity"
+      aria-label="Departure City"
+    />
+  </div>
 
-    </section>
+  <div class="form-group">
+    <label for="airportDepartureCity"
+      >Airport Departure City (Country, City):</label
+    >
+    <input
+      type="text"
+      id="airportDepartureCity"
+      name="airportDepartureCity"
+      aria-label="Airport Departure City"
+      readonly
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="arrivalCity">Arrival City (Airport Code):</label>
+    <input
+      type="text"
+      id="arrivalCity"
+      name="arrivalCity"
+      aria-label="Arrival City"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="airportArrivalCity"
+      >Airport Arrival City (Country, City):</label
+    >
+    <input
+      type="text"
+      id="airportArrivalCity"
+      name="airportArrivalCity"
+      aria-label="Airport Arrival City"
+      readonly
+    />
+  </div>
+
+  <script>
+    // بدء القراءة والتحويل
+    $.get('airports.dat', function(data) {
+      const airportCodes = {};
+
+      // تقسيم البيانات إلى أسطر
+      const lines = data.split('\n');
+      
+      // معالجة كل سطر وإضافة بيانات المطارات إلى الهيكل
+      lines.forEach(function(line) {
+        const parts = line.split(',');
+        if (parts.length >= 12) {
+          const airportCode = parts[4].replace(/"/g, ''); // الرمز
+          const country = parts[3].replace(/"/g, ''); // البلد
+          const city = parts[2].replace(/"/g, ''); // المدينة
+          airportCodes[airportCode] = `${country}, ${city}`;
+        }
+      });
+
+      // الآن يمكنك استخدام airportCodes كما في المثال السابق
+      $(function () {
+        $("#departureCity").autocomplete({
+          source: Object.keys(airportCodes),
+          select: function (event, ui) {
+            $("#departureCity").val(ui.item.value);
+            fillDepartureCity();
+          },
+        });
+
+        $("#arrivalCity").autocomplete({
+          source: Object.keys(airportCodes),
+          select: function (event, ui) {
+            $("#arrivalCity").val(ui.item.value);
+            fillArrivalCity();
+          },
+        });
+      });
+
+      function fillDepartureCity() {
+        const departureCityCode = document
+          .getElementById("departureCity")
+          .value.toUpperCase();
+        const departureCityInfo = airportCodes[departureCityCode] || "";
+        document.getElementById("airportDepartureCity").value =
+          departureCityInfo;
+      }
+
+      function fillArrivalCity() {
+        const arrivalCityCode = document
+          .getElementById("arrivalCity")
+          .value.toUpperCase();
+        const arrivalCityInfo = airportCodes[arrivalCityCode] || "";
+        document.getElementById("airportArrivalCity").value = arrivalCityInfo;
+      }
+    });
+  </script>
 </body>
 </html>

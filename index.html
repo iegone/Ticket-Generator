@@ -1,59 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ticket Generator</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body onload="flightLogo()">
- <div class="container">
-         <div id="formContainer" class="form-container">
-      <h2 style=" color: black; text-align: center; margin-bottom: 20px;">Enter Ticket Information</h2>
-      <hr>
-      <form id="ticketForm">
-        <div class="passenger-data">
-          <div class="titel-guoup">
-            
-            <div class="form-group">
-              <label for="nameTitles">Titles:</label>
-              <select name="nameTitles" id="nameTitles">
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
-              </select>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  </head>
+  <body onload="initializePage()">
+    <div class="container">
+      <div id="formContainer" class="form-container">
+        <form id="ticketForm">
+          <div class="passenger-data">
+            <div class="titel-guoup">
+              <div style="grid-column: 1/2" class="form-group">
+                <label for="nameTitles">Titles:</label>
+                <select name="nameTitles" id="nameTitles" aria-label="Title">
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Ms">Ms</option>
+                </select>
+              </div>
+
+              <div style="grid-column: 2/3" class="form-group">
+                <label for="passengerName">Passenger Name:</label>
+                <input
+                  type="text"
+                  id="passengerName"
+                  name="passengerName"
+                  required
+                  aria-required="true"
+                  aria-label="Passenger Name"
+                />
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="passengerName">Passenger Name:</label>
-              <input type="text" id="passengerName" required name="passengerName"  />
+              <label for="reservationCode">PNR Code :</label>
+              <input
+                type="text"
+                id="reservationCode"
+                name="reservationCode"
+                aria-label="PNR Code"
+              />
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="reservationCode">PNR Code :</label>
-            <input type="text" id="reservationCode" name="reservationCode" />
-          </div>
-        </div>
+          <hr />
 
-        <hr />
-
-        <div style="display: flex; gap: 10px">
-
-            <div class="departure-group">
+          <div class="departure-group">
             <div class="form-group">
               <label for="departureTime">Departure Time:</label>
               <input
                 type="datetime-local"
                 id="departureTime"
                 name="departureTime"
+                aria-label="Departure Time"
               />
             </div>
 
             <div class="form-group">
               <label for="departureCity">Departure City:</label>
-              <input type="text" id="departureCity" name="departureCity" />
+              <input
+                type="text"
+                id="departureCity"
+                name="departureCity"
+                aria-label="Departure City"
+              />
             </div>
 
             <div class="form-group">
@@ -62,14 +81,13 @@
                 type="text"
                 id="airportDepartureCity"
                 name="airportDepartureCity"
+                aria-label="Airport Departure City"
               />
             </div>
-
-            <div class="form-group">
-              <label for="Terminal-1">Terminal-1:</label>
-              <input type="text" id="Terminal-1" name="Terminal-1" />
-            </div>
           </div>
+
+          <hr />
+
           <div class="arrival-group">
             <div class="form-group">
               <label for="arrivalTime">Arrival Time:</label>
@@ -77,12 +95,18 @@
                 type="datetime-local"
                 id="arrivalTime"
                 name="arrivalTime"
+                aria-label="Arrival Time"
               />
             </div>
 
             <div class="form-group">
               <label for="arrivalCity">Arrival City:</label>
-              <input type="text" id="arrivalCity" name="arrivalCity" />
+              <input
+                type="text"
+                id="arrivalCity"
+                name="arrivalCity"
+                aria-label="Arrival City"
+              />
             </div>
 
             <div class="form-group">
@@ -91,201 +115,261 @@
                 type="text"
                 id="airportArrivalCity"
                 name="airportArrivalCity"
+                aria-label="Airport Arrival City"
               />
-            </div>
-
-            <div class="form-group">
-              <label for="Terminal-2">Terminal-2:</label>
-              <input type="text" id="Terminal-2" name="Terminal-2" />
             </div>
           </div>
 
-          
+          <hr />
 
           <div class="flight-groupe">
             <div class="form-group">
               <label for="flightNumber">Flight Number:</label>
-              <input type="text" id="flightNumber" name="flightNumber" />
+              <input
+                type="text"
+                id="flightNumber"
+                name="flightNumber"
+                aria-label="Flight Number"
+              />
             </div>
 
             <div class="form-group">
               <label for="airLine">Airline:</label>
-              <input type="text" id="airLine" name="airLine" />
+              <input
+                type="text"
+                id="airLine"
+                name="airLine"
+                aria-label="Airline"
+              />
             </div>
 
             <div class="form-group">
               <label for="Status">Status:</label>
-              <input type="text" id="Status" name="Status" />
+              <input
+                type="text"
+                id="Status"
+                name="Status"
+                aria-label="Status"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="weight">Weight:</label>
+              <input
+                type="text"
+                id="weight"
+                name="weight"
+                aria-label="Weight"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="Terminal-1">Terminal-1:</label>
+              <input
+                type="text"
+                id="Terminal-1"
+                name="Terminal-1"
+                aria-label="Terminal 1"
+              />
             </div>
             <div class="form-group">
-            <label for="weight">Weight:</label>
-            <input type="text" id="weight" name="weight" />
-          </div>
-          </div>
-          
-        </div>
-        
-
-        <hr />
-
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; max-width: 500px;">
-          <div class="form-group">
-            <label for="cabinClass">Cabin Class:</label>
-            <input type="text" id="cabinClass" name="cabinClass" />
-          </div>
-          
-
-          <div class="form-group">
-            <label for="eTicket">eTicket:</label>
-            <input type="text" id="eTicket" name="eTicket" />
+              <label for="Terminal-2">Terminal-2:</label>
+              <input
+                type="text"
+                id="Terminal-2"
+                name="Terminal-2"
+                aria-label="Terminal 2"
+              />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="seats">Seats:</label>
-            <input type="text" id="seats" name="seats" />
+          <hr />
+
+          <div
+            style="display: flex; gap: 10px; flex-wrap: wrap; max-width: 500px"
+          >
+            <div class="form-group">
+              <label for="cabinClass">Cabin Class:</label>
+              <input
+                type="text"
+                id="cabinClass"
+                name="cabinClass"
+                aria-label="Cabin Class"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="eTicket">eTicket:</label>
+              <input
+                type="text"
+                id="eTicket"
+                name="eTicket"
+                aria-label="eTicket"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="seats">Seats:</label>
+              <input type="text" id="seats" name="seats" aria-label="Seats" />
+            </div>
+
+            <div class="form-group">
+              <label for="Meals">Meals:</label>
+              <input type="text" id="Meals" name="Meals" aria-label="Meals" />
+            </div>
+
+            <div class="form-group">
+              <label for="flightLogo">Flight logo:</label>
+              <input
+                type="file"
+                id="flightLogo"
+                accept="image/jpeg, image/png, image/jpg"
+                name="flightLogo"
+                aria-label="Flight logo"
+              />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="Meals">Meals:</label>
-            <input type="text" id="Meals" name="Meals" />
-          </div>
-          <div class="form-group">
-            <label for="flightLogo">Flight logo:</label>
-            <input type="file" id="flightLogo" accept="image/jpeg, image/png, image/jpg" name="flightLogo" />
-            
-            
-          </div>
+          <hr />
 
-        </div>
-        <hr>
-
-        <div style="display: flex; gap: 10px; align-items: center; justify-content: center; flex-direction: column;">
-
-          <div class="button-group">
-
-          </div>
-          <div class="form-group">
-            <input type="submit"  value="Generate Ticket" />
-            <button id="print-btn" class="Print disabled" onclick="Print()">Print ticket</button>
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+            "
+          >
+            <div class="form-group">
+              <input type="submit" value="Generate Ticket" />
+              <button id="print-btn" class="Print disabled" onclick="Print()">
+                Print ticket
+              </button>
+            </div>
           </div>
         </form>
-        
       </div>
-        </div>
 
-
-         <div id="ticketPage" class="ticket">
-            <img class="watermark" src="watermark.png" alt="">
-             <h3 id="displayDepartureDetails"></h3>
-            <hr>
-            <div class="FOR">
-                <p>PREPARED FOR</p>
-                <p><span id="displayTitles">MR</span>: <span id="templateName"></span></p>
-                <p class="pnr">RESERVATION CODE : <span class="pnr-code" id="displayReservationCode"></span></p>
-                <img id="photo" src="" alt="">
-              </div>
-            <hr>
-            <div class="flex">
-                <img class="flight-icone" src="siwar.png" alt="Flight Icon">
-                <span><span id="displayDepartureDate"></span> Please verify flight times prior to departure</span>
-            </div>
-            <div class="ticket-holder">
-                <div class="in-general">
-                    <span>
-                        <h3 id="displayAirLine">----</h3>
-                        <h4 id="displayFlightNumber"></h4>
-                    </span>
-                    <span>
-                        <p>Flying time:</p>
-                        <p id="displayFlyingTime">----</p>
-                    </span>
-                    <span>
-                        <p>Cabin:</p>
-                        <p id="displayCabinClass">----</p>
-                    </span>
-                    <span>
-                        <p>Status:</p>
-                        <p id="displayStatus">----</p>
-                    </span>
-                </div>
-                <div class="ticket-details">
-                    <span>
-                        <h4 id="displayDepartureCity">----</h4>
-                        <p id="displayAirportDepartureCity">----</p>
-                    </span>
-                    <span>
-                        <h4 id="displayArrivalCity">----</h4>
-                        <p id="displayAirportArrivalCity">----</p>
-                    </span>
-                    <span>
-                        <p>Distance:</p>
-                        <p>---- Miles</p>
-                        <p>Meals:</p>
-                        <p id="displayMeals">----</p>
-                        <p>Weight</p>
-                        <p id="displayWeight">----</p>
-                    </span>
-                    <span>
-                        <p>Departing At:</p>
-                        <h4 id="displayDepartureTime">--:--</h4>
-                        <p>Terminal:</p>
-                        <p id="displayTerminal-1">Not Available</p>
-                    </span>
-                    <span>
-                        <p>Arriving At:</p>
-                        <h4 id="displayArrivalTime">--:--</h4>
-                        <p>Terminal:</p>
-                        <p id="displayTerminal-2">Not Available</p>
-                    </span>
-                </div>
-            </div>
-            <table>
-                <tr>
-                    <th>Passenger Name:</th>
-                    <th>Seats:</th>
-                    <th>eTicket Receipt:</th>
-                </tr>
-                <tr>
-                    <td id="displayPassengerName">----</td>
-                    <td id="displaySeats">----</td>
-                    <td id="displayETicket">----</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>Notes</th>
-                </tr>
-                <tr>
-                    <td>You must be at the airport at least 3 hours in advance</td>
-                </tr>
-                <tr>
-                    <!-- <td><span id="displayNotes">----</span></td> -->
-                </tr>
-            </table>
-           
-            <footer>
-                <div>
-                    <p>+96877144209</p>
-                    <p>Sales@siwartravels.com</p>
-                </div>
-                <div>
-                    <p>
-                        C.R : 1398240
-                        <br>
-                        BOX : 117
-                        <br>
-                        P.C:124
-                        <br>
-                        S.of Oman
-                    </p>
-                    <img src="Untitled 1 (1).png" alt="">
-                </div>
-            </footer>
-            <img class="siwar-logo" src="siwar-logo.png" alt="">
+      <div id="ticketPage" class="ticket">
+        <img class="watermark" src="watermark.png" alt="Watermark" />
+        <h3 id="displayDepartureDetails"></h3>
+        <hr />
+        <div class="FOR">
+          <p>PREPARED FOR</p>
+          <p>
+            <span id="displayTitles">MR</span>: <span id="templateName"></span>
+          </p>
+          <p class="pnr">
+            RESERVATION CODE :
+            <span class="pnr-code" id="displayReservationCode"></span>
+          </p>
+          <img id="photo" src="" alt="Flight logo" />
         </div>
-        <!-- <button class="Print" onclick="Print()">Print ticket</button> -->
-    </div>    
+        <hr />
+        <div class="flex">
+          <img class="flight-icone" src="siwar.png" alt="Flight Icon" />
+          <span
+            ><span id="displayDepartureDate"></span> Please verify flight times
+            prior to departure</span
+          >
+        </div>
+        <div class="ticket-holder">
+          <div class="in-general">
+            <span>
+              <h3 id="displayAirLine">----</h3>
+              <h4 id="displayFlightNumber"></h4>
+            </span>
+            <span>
+              <p>Flying time:</p>
+              <p id="displayFlyingTime">----</p>
+            </span>
+            <span>
+              <p>Cabin:</p>
+              <p id="displayCabinClass">----</p>
+            </span>
+            <span>
+              <p>Status:</p>
+              <p id="displayStatus">----</p>
+            </span>
+          </div>
+          <div class="ticket-details">
+            <span>
+              <h4 id="displayDepartureCity">----</h4>
+              <p id="displayAirportDepartureCity">----</p>
+            </span>
+            <span>
+              <h4 id="displayArrivalCity">----</h4>
+              <p id="displayAirportArrivalCity">----</p>
+            </span>
+            <span>
+              <p>Distance:</p>
+              <p>---- Miles</p>
+              <p>Meals:</p>
+              <p id="displayMeals">----</p>
+              <p>Weight</p>
+              <p id="displayWeight">----</p>
+            </span>
+            <span>
+              <p>Departing At:</p>
+              <h4 id="displayDepartureTime">--:--</h4>
+              <p>Terminal:</p>
+              <p id="displayTerminal-1">Not Available</p>
+            </span>
+            <span>
+              <p>Arriving At:</p>
+              <h4 id="displayArrivalTime">--:--</h4>
+              <p>Terminal:</p>
+              <p id="displayTerminal-2">Not Available</p>
+            </span>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <th>Passenger Name:</th>
+            <th>Seats:</th>
+            <th>eTicket Receipt:</th>
+          </tr>
+          <tr>
+            <td id="displayPassengerName">----</td>
+            <td id="displaySeats">----</td>
+            <td id="displayETicket">----</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>You must be at the airport at least 3 hours in advance</td>
+          </tr>
+          <tr>
+            <!-- <td><span id="displayNotes">----</span></td> -->
+          </tr>
+        </table>
+
+        <footer>
+          <div>
+            <p>+96877144209</p>
+            <p>Sales@siwartravels.com</p>
+          </div>
+          <div>
+            <p>
+              C.R : 1398240
+              <br />
+              BOX : 117
+              <br />
+              P.C:124
+              <br />
+              S.of Oman
+            </p>
+            <img src="Untitled 1 (1).png" alt="" />
+          </div>
+        </footer>
+        <img class="siwar-logo" src="siwar-logo.png" alt="" />
+      </div>
+    </div>
+
     <script src="script.js"></script>
-    
-</body>
+  </body>
 </html>

@@ -35,10 +35,9 @@ body {
   height: 100%;
   display: flex;
   /* justify-content: center;*/
-  align-items: center; 
+  align-items: center;
   /* position: relative; */
 }
-
 
 /* ====== form container ====== */
 
@@ -48,34 +47,44 @@ body {
   box-shadow: 0 0 10px var(--box-shadow-color);
   border-radius: 8px;
   scale: 1;
-  
+
+  overflow: scroll;
   /* position: absolute; */
   height: 100%;
-  width: 700px;
+  width: 550px;
   left: 0;
   top: 0;
   bottom: 0;
-  
-  
+}
+
+
+.passenger-data,
+.departure-group,
+.arrival-group,
+.flight-groupe {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .titel-guoup {
-  display: flex;
+  display:grid;
+  grid-template-columns: 70px 1fr ;
+  width: 100%;
   gap: 5px;
 }
 
-.passenger-data{
+.passenger-data {
   display: flex;
   gap: 10px;
 }
 
 #displayDepartureDetails {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .form-group {
   margin-bottom: 15px;
-  
 }
 
 .form-group label {
@@ -87,11 +96,17 @@ body {
 
 .form-group input,
 .form-group select {
-  max-width: 200px;
+  max-width: 150px;
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
   border: 1px solid var(--border-color);
+}
+
+
+#passengerName{
+  width: 100%;
+  max-width: 100%;
 }
 
 .form-group input[type="submit"] {
@@ -99,7 +114,7 @@ body {
   color: #fff;
   border: none;
   cursor: pointer;
-  width: 120px;
+  width: 150px;
 }
 
 button.Print {
@@ -113,15 +128,13 @@ button.Print {
   border: 1px solid var(--border-color);
 }
 
-button.disabled{
+button.disabled {
   background: var(--text-color-light);
   cursor: none;
   color: #cecece;
 }
 
 /* ====== ticket container ====== */
-
-
 
 .ticket {
   padding: var(--padding-small);
@@ -137,12 +150,11 @@ button.disabled{
   /* display: none; */
   scale: 0.7;
 }
-#photo{
+#photo {
   height: 50px;
   position: absolute;
   right: 20px;
   top: 0;
-
 }
 
 #ticketForm {
@@ -217,7 +229,6 @@ button.disabled{
   width: 70px;
 }
 
-
 .FOR {
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -252,7 +263,6 @@ button.disabled{
   text-transform: uppercase;
 }
 
-
 .pnr {
   color: white;
   text-transform: uppercase;
@@ -281,7 +291,7 @@ button.disabled{
 .ticket p {
   margin-bottom: 10px;
 }
-.ticket p{
+.ticket p {
   font-size: 14px;
 }
 .flex {
@@ -389,20 +399,90 @@ button.disabled{
   color: var(--text-color-light);
 }
 
-
 @media (max-width: 768px) {
+  body {
+    /* width: 100vw;
+            height: 100vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+  }
+
+  .form-container,
+  .form-group input,
+  .form-group select {
+    all: unset;
+  }
+  .form-container {
+    background: var(--background-color);
+    padding: var(--padding-small);
+    box-shadow: 0 0 10px var(--box-shadow-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    /* margin-right: 20px; */
+  }
+
+  .passenger-data,
+  .departure-group,
+  .arrival-group,
+  .flight-groupe {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: var(--text-color-light);
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+  }
+
+  .form-group input[type="submit"],
+  .Print {
+    background: var(--main-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  button.disabled {
+    background: var(--text-color-light);
+    cursor: none;
+    color: #cecece;
+  }
+
   .container {
     flex-direction: column;
     align-items: center;
   }
 
   .form-container {
-    margin-bottom: 30px;
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   .ticket {
-    width: 100%;
-      display: none;
+    display: none;
   }
 }
 
@@ -410,7 +490,7 @@ button.disabled{
   body > * {
     display: none;
   }
-  
+
   .container > * {
     display: none;
   }
