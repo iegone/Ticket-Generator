@@ -147,6 +147,8 @@ button.disabled {
   padding-left: var(--padding-large);
   padding-top: var(--padding-top);
   box-shadow: 0 0 10px var(--box-shadow-color);
+
+  padding: 150px 20px 20px 70px;
   /* display: none; */
   scale: 0.7;
 }
@@ -184,6 +186,7 @@ button.disabled {
   align-items: end;
   left: 5px;
   width: 100%;
+  /* display: none; */
 }
 
 .ticket footer div > p {
@@ -213,6 +216,8 @@ button.disabled {
   top: 40px;
   left: 20px;
   height: 263mm;
+  display: none;
+  display: block;
 }
 
 .watermark {
@@ -336,7 +341,7 @@ button.disabled {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .ticket .ticket-details span:nth-child(1) {

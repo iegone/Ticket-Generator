@@ -353,3 +353,26 @@ function initializePage() {
 
 }
 
+function withoutLogo() {
+  const siwarLogo = document.getElementById("siwarLogo");
+  const watermark = document.getElementById("watermark");
+  const ticketFooter = document.getElementById("ticketFooter");
+  const ticketPage = document.getElementById("ticketPage");
+
+  if (siwarLogo.style.display === "block") {
+    siwarLogo.style.display = "none";
+    watermark.style.display = "none";
+    ticketFooter.style.display = "none";
+    ticketPage.style.padding = "100px 20px 20px 20px";
+
+  } else {
+    
+
+    siwarLogo.style.display = "block";
+    watermark.style.display = "block";
+    ticketFooter.style.display = "flex";
+    ticketPage.style.padding = "150px 20px 20px 70px";
+  }
+
+  
+}

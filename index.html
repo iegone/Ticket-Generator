@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   </head>
-  <body onload="initializePage()">
+  <body onload="flightLogo(),initializePage()" >
     <div class="container">
       <div id="formContainer" class="form-container">
         <form id="ticketForm">
@@ -247,12 +247,14 @@
                 Print ticket
               </button>
             </div>
+            
           </div>
         </form>
+        <button onclick="withoutLogo()" id="withoutLogo">logo</button>
       </div>
 
       <div id="ticketPage" class="ticket">
-        <img class="watermark" src="watermark.png" alt="Watermark" />
+        <img id="watermark" class="watermark" src="watermark.png" alt="Watermark" />
         <h3 id="displayDepartureDetails"></h3>
         <hr />
         <div class="FOR">
@@ -348,7 +350,7 @@
           </tr>
         </table>
 
-        <footer>
+        <footer id="ticketFooter">
           <div>
             <p>+96877144209</p>
             <p>Sales@siwartravels.com</p>
@@ -366,9 +368,10 @@
             <img src="Untitled 1 (1).png" alt="" />
           </div>
         </footer>
-        <img class="siwar-logo" src="siwar-logo.png" alt="" />
+        <img id="siwarLogo" class="siwar-logo" src="siwar-logo.png" alt="" />
       </div>
     </div>
+    
 
     <script src="script.js"></script>
   </body>
